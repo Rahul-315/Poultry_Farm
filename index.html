@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rao's Poultry Farm – Fresh From the Farm</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -93,9 +94,9 @@
     display:flex; gap:1rem; margin-top:2.2rem; flex-wrap:wrap;
     animation: fadeSlideUp 0.7s 0.3s ease both;
   }
-  .btn-primary { background:var(--amber); color:#fff; padding:0.85rem 2rem; border-radius:10px; font-weight:600; font-size:0.95rem; text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s; }
+  .btn-primary { background:var(--amber); color:#fff; padding:0.85rem 2rem; border-radius:10px; font-weight:600; font-size:0.95rem; text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s,box-shadow 0.2s; box-shadow:0 4px 16px rgba(232,132,26,0.3); display:inline-flex; align-items:center; gap:8px; }
   .btn-primary:hover { background:var(--amber-dark); transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,132,26,0.4); }
-  .btn-secondary { background:transparent; color:var(--text-dark); padding:0.85rem 2rem; border-radius:10px; font-weight:600; font-size:0.95rem; text-decoration:none; border:2px solid var(--border); cursor:pointer; transition:all 0.2s; }
+  .btn-secondary { background:transparent; color:var(--text-dark); padding:0.85rem 2rem; border-radius:10px; font-weight:600; font-size:0.95rem; text-decoration:none; border:2px solid var(--border); cursor:pointer; transition:border-color 0.2s,transform 0.15s,background 0.2s; display:inline-flex; align-items:center; gap:8px; }
   .btn-secondary:hover { border-color:var(--amber); background:var(--amber-light); transform:translateY(-2px); }
   .hero-stats {
     display:flex; gap:2.5rem; margin-top:2.8rem;
@@ -218,7 +219,7 @@
   .prod-bottom { display:flex; align-items:center; justify-content:space-between; margin-top:0.8rem; }
   .prod-price { font-weight:700; font-size:1.05rem; color:var(--amber-dark); font-family:'Playfair Display',serif; }
   .prod-price del { font-size:0.75rem; font-family:'DM Sans',sans-serif; color:var(--text-muted); font-weight:400; margin-left:4px; }
-  .prod-add { background:var(--green); color:#fff; border:none; width:32px; height:32px; border-radius:8px; font-size:1.2rem; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; }
+  .prod-add { background:var(--green); color:#fff; border:none; width:32px; height:32px; border-radius:8px; font-size:1.2rem; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; font-weight:700; }
   .prod-add:hover { background:var(--green-mid); transform:scale(1.1); }
   .prod-rating { font-size:0.75rem; color:var(--text-muted); margin-top:4px; }
   .stars { color:#F5A623; letter-spacing:-1px; }
@@ -236,7 +237,7 @@
   .delivery-section .section-sub { color:rgba(255,255,255,0.7); }
   .delivery-steps { margin-top:2.5rem; display:flex; flex-direction:column; gap:1.2rem; }
   .d-step { display:flex; align-items:flex-start; gap:1rem; }
-  .d-num { width:36px; height:36px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:600; color:#fff; }
+  .d-num { width:36px; height:36px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; color:var(--amber); flex-shrink:0; }
   .d-step h4 { font-size:0.95rem; font-weight:600; color:#fff; }
   .d-step p { font-size:0.82rem; color:rgba(255,255,255,0.6); margin-top:2px; line-height:1.5; }
   .delivery-card {
@@ -266,7 +267,7 @@
   .supply-card .s-icon { width:50px; height:50px; border-radius:12px; background:var(--amber-light); display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; }
   .supply-card h4 { font-size:0.95rem; font-weight:600; }
   .supply-card p { font-size:0.8rem; color:var(--text-muted); margin-top:2px; }
-  .supply-card .s-badge { margin-left:auto; font-size:0.68rem; font-weight:700; background:var(--green-light); color:var(--green); padding:3px 8px; border-radius:5px; flex-shrink:0; text-transform:uppercase; }
+  .supply-card .s-badge { margin-left:auto; font-size:0.68rem; font-weight:700; background:var(--green-light); color:var(--green); padding:3px 8px; border-radius:5px; flex-shrink:0; text-transform:uppercase; letter-spacing:0.04em; }
   .supply-form {
     background:var(--cream); border-radius:20px; padding:2.5rem;
     border:1px solid var(--border);
@@ -299,13 +300,13 @@
   .testi-stars { color:#F5A623; font-size:0.9rem; margin-bottom:0.75rem; }
   .testi-text { font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-style:italic; }
   .testi-author { display:flex; align-items:center; gap:0.75rem; margin-top:1.25rem; }
-  .testi-avatar { width:40px; height:40px; border-radius:50%; background:var(--amber-light); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; color:var(--amber-dark); }
+  .testi-avatar { width:40px; height:40px; border-radius:50%; background:var(--amber-light); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; color:var(--amber-dark); flex-shrink:0; }
   .testi-name { font-weight:600; font-size:0.88rem; }
   .testi-role { font-size:0.75rem; color:var(--text-muted); }
 
   /* ORDER SECTION */
   .order-section { background:var(--brown); color:#fff; position:relative; overflow:hidden; }
-  .order-section .bg-line { position:absolute; inset:0; pointer-events:none; opacity:0.05; background:repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%); }
+  .order-section .bg-line { position:absolute; inset:0; pointer-events:none; opacity:0.05; background:repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%); background-size:20px 20px; }
   .order-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
   .order-section .section-label { color:var(--amber); }
   .order-section .section-title { color:#fff; }
@@ -333,7 +334,7 @@
   .ci-qty { font-size:0.75rem; color:rgba(255,255,255,0.5); }
   .ci-price { font-size:0.9rem; font-weight:700; color:var(--amber); }
   .ci-ctrl { display:flex; align-items:center; gap:6px; margin-top:3px; }
-  .ci-btn { background:rgba(255,255,255,0.1); border:none; color:#fff; width:22px; height:22px; border-radius:5px; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; justify-content:center; }
+  .ci-btn { background:rgba(255,255,255,0.1); border:none; color:#fff; width:22px; height:22px; border-radius:5px; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
   .ci-btn:hover { background:rgba(255,255,255,0.2); }
   .cart-total { margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:space-between; }
   .ct-label { color:rgba(255,255,255,0.6); font-size:0.85rem; }
@@ -426,6 +427,212 @@
   @keyframes countUp { from { opacity:0 } to { opacity:1 } }
 
   .section-header-row { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+
+/* ===== PROFESSIONAL 3D ANIMATIONS ===== */
+.product-card-big,
+.prod-card,
+.why-card,
+.testi-card,
+.supply-card,
+.order-option,
+.mini-card {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.product-card-big:hover,
+.prod-card:hover,
+.why-card:hover,
+.testi-card:hover,
+.supply-card:hover,
+.order-option:hover,
+.mini-card:hover {
+  transform: rotateX(6deg) rotateY(-6deg) translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
+}
+
+.hero h1,
+.section-title {
+  text-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.btn-primary,
+.btn-secondary,
+.add-btn,
+.checkout-btn,
+.track-btn {
+  transition: all 0.35s ease;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.add-btn:hover,
+.checkout-btn:hover,
+.track-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.hero-visual {
+  animation: floating 5s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ===== MOBILE RESPONSIVE DESIGN ===== */
+.hamburger {
+  display:none;
+  font-size:1.6rem;
+  cursor:pointer;
+  color:var(--text-dark);
+}
+
+@media (max-width: 1100px) {
+  .hero-inner,
+  .delivery-inner,
+  .supply-inner,
+  .order-inner,
+  .footer-top {
+    grid-template-columns:1fr;
+    gap:3rem;
+  }
+
+  .products-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .why-grid,
+  .testimonials-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-x:hidden;
+  }
+
+  .nav-inner {
+    padding:0 1rem;
+  }
+
+  .hamburger {
+    display:block;
+  }
+
+  .nav-links {
+    position:absolute;
+    top:72px;
+    left:0;
+    right:0;
+    background:#fff;
+    flex-direction:column;
+    align-items:flex-start;
+    padding:1rem 1.5rem;
+    display:none;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    border-radius:0 0 16px 16px;
+  }
+
+  .nav-links.show {
+    display:flex;
+  }
+
+  .hero {
+    padding:7rem 1rem 3rem;
+  }
+
+  section {
+    padding:4rem 1rem;
+  }
+
+  .hero-inner,
+  .delivery-inner,
+  .supply-inner,
+  .order-inner,
+  .footer-top {
+    grid-template-columns:1fr;
+  }
+
+  .hero h1 {
+    font-size:2.2rem;
+  }
+
+  .hero-sub,
+  .section-sub {
+    font-size:0.95rem;
+  }
+
+  .hero-stats {
+    gap:1.2rem;
+    flex-wrap:wrap;
+  }
+
+  .mini-cards,
+  .products-grid,
+  .why-grid,
+  .testimonials-grid,
+  .order-options,
+  .form-row {
+    grid-template-columns:1fr;
+  }
+
+  .product-card-big .img-area {
+    height:180px;
+    font-size:5rem;
+  }
+
+  .cart-floater {
+    width:54px;
+    height:54px;
+    bottom:1rem;
+    right:1rem;
+  }
+
+  .footer-bottom {
+    flex-direction:column;
+    gap:1rem;
+    text-align:center;
+  }
+
+  .modal {
+    padding:1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size:1.8rem;
+    line-height:1.25;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width:100%;
+    justify-content:center;
+  }
+
+  .hero-actions {
+    flex-direction:column;
+  }
+
+  .section-title {
+    font-size:1.7rem;
+  }
+
+  .hero-stat .num {
+    font-size:1.4rem;
+  }
+
+  .logo-text {
+    font-size:1rem;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -437,7 +644,8 @@
       <div class="logo-icon">🐓</div>
       <div class="logo-text">Rao's Poultry Farm<span class="logo-sub">Est. 2008 · Hyderabad</span></div>
     </a>
-    <div class="nav-links">
+    <div class="hamburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
+    <div class="nav-links" id="mobileMenu">
       <a href="#products">Shop</a>
       <a href="#delivery">Delivery</a>
       <a href="#supply">Bulk Supply</a>
@@ -453,7 +661,7 @@
 
 <!-- CART FLOATER -->
 <button class="cart-floater" onclick="scrollToOrder()" id="cartFloater">
-  🛒
+  <i class="fa-solid fa-cart-shopping"></i>
   <span class="cart-count" id="cartCount">0</span>
 </button>
 
@@ -541,7 +749,7 @@
     <div class="why-grid">
       <div class="why-card reveal"><div class="why-icon">🌿</div><h3>No Hormones or Antibiotics</h3><p>Our birds are raised naturally on wholesome grain feed without any growth hormones or antibiotics.</p></div>
       <div class="why-card reveal"><div class="why-icon">❄️</div><h3>Cold-Chain Delivery</h3><p>Every order is packed in insulated boxes with ice packs, maintaining safe temperatures throughout delivery.</p></div>
-      <div class="why-card reveal"><div class="why-icon">📋</div><h3>FSSAI Certified</h3><p>Our farm and processing unit are certified by FSSAI, ensuring the highest food safety standards.</p></div>
+      <div class="why-card reveal"><div class="why-icon"><i class="fa-solid fa-clipboard-list"></i></div><h3>FSSAI Certified</h3><p>Our farm and processing unit are certified by FSSAI, ensuring the highest food safety standards.</p></div>
       <div class="why-card reveal"><div class="why-icon">⚡</div><h3>Same-Day Delivery</h3><p>Order before 12 PM and receive fresh chicken at your doorstep the same day across Hyderabad.</p></div>
     </div>
   </div>
@@ -566,35 +774,35 @@
     <div class="products-grid" id="productsGrid">
       <div class="prod-card reveal" data-cat="chicken">
         <div class="prod-img">🐓<span class="prod-tag tag-bestseller">Bestseller</span></div>
-        <div class="prod-body"><h3>Country Chicken (Nati)</h3><p class="prod-desc">Free-range, slow-grown. Full of flavour.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.9 (856)</div><div class="prod-bottom"><span class="prod-price">₹450 <del>₹520</del></span><button class="prod-add" onclick="addToCart('Country Chicken',450)">+</button></div></div>
+        <div class="prod-body"><h3>Country Chicken (Nati)</h3><p class="prod-desc">Free-range, slow-grown. Full of flavour.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.9 (312)</div><div class="prod-bottom"><div class="prod-price">₹480<del>₹550</del></div><button class="prod-add" onclick="addToCart('Country Chicken',480)">+</button></div></div>
       </div>
       <div class="prod-card reveal" data-cat="chicken">
         <div class="prod-img">🍗<span class="prod-tag tag-fresh">Fresh</span></div>
-        <div class="prod-body"><h3>Broiler Whole</h3><p class="prod-desc">Standard broiler, dressed & cleaned.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.7 (528)</div><div class="prod-bottom"><span class="prod-price">₹220</span><button class="prod-add" onclick="addToCart('Broiler Whole',220)">+</button></div></div>
+        <div class="prod-body"><h3>Broiler Whole</h3><p class="prod-desc">Standard broiler, dressed & cleaned.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.7 (528)</div><div class="prod-bottom"><div class="prod-price">₹220<del>₹260</del></div><button class="prod-add" onclick="addToCart('Broiler Whole',220)">+</button></div></div>
       </div>
       <div class="prod-card reveal" data-cat="chicken">
         <div class="prod-img">🍖<span class="prod-tag tag-new">New</span></div>
-        <div class="prod-body"><h3>Boneless Breast</h3><p class="prod-desc">Skinless, fat-trimmed, cut to 200g pieces.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.8 (198)</div><div class="prod-bottom"><span class="prod-price">₹380</span><button class="prod-add" onclick="addToCart('Boneless Breast',380)">+</button></div></div>
+        <div class="prod-body"><h3>Boneless Breast</h3><p class="prod-desc">Skinless, fat-trimmed, cut to 200g pieces.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.8 (198)</div><div class="prod-bottom"><div class="prod-price">₹400</div><button class="prod-add" onclick="addToCart('Boneless Breast',400)">+</button></div></div>
       </div>
       <div class="prod-card reveal" data-cat="eggs">
         <div class="prod-img">🥚<span class="prod-tag tag-fresh">Fresh</span></div>
-        <div class="prod-body"><h3>Desi Eggs (30 pcs)</h3><p class="prod-desc">Free-range brown eggs, high protein yolk.</p><div class="prod-rating"><span class="stars">★★★★★</span> 5.0 (740)</div><div class="prod-bottom"><span class="prod-price">₹240</span><button class="prod-add" onclick="addToCart('Desi Eggs',240)">+</button></div></div>
+        <div class="prod-body"><h3>Desi Eggs (30 pcs)</h3><p class="prod-desc">Free-range brown eggs, high protein yolk.</p><div class="prod-rating"><span class="stars">★★★★★</span> 5.0 (740)</div><div class="prod-bottom"><div class="prod-price">₹240</div><button class="prod-add" onclick="addToCart('Desi Eggs 30pc',240)">+</button></div></div>
       </div>
       <div class="prod-card reveal" data-cat="marinated">
         <div class="prod-img">🌶️<span class="prod-tag tag-bestseller">Hot Pick</span></div>
-        <div class="prod-body"><h3>Spicy Marinated Legs</h3><p class="prod-desc">Andhra-style red chili marination. Grill-ready.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.9 (421)</div><div class="prod-bottom"><span class="prod-price">₹320</span><button class="prod-add" onclick="addToCart('Spicy Marinated Legs',320)">+</button></div></div>
+        <div class="prod-body"><h3>Spicy Marinated Legs</h3><p class="prod-desc">Andhra-style red chili marination. Grill-ready.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.9 (256)</div><div class="prod-bottom"><div class="prod-price">₹360</div><button class="prod-add" onclick="addToCart('Spicy Marinated Legs',360)">+</button></div></div>
       </div>
       <div class="prod-card reveal" data-cat="marinated">
         <div class="prod-img">🍋<span class="prod-tag tag-new">New</span></div>
-        <div class="prod-body"><h3>Lemon Herb Pieces</h3><p class="prod-desc">Light citrus & herb marination. Oven-ready.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.6 (89)</div><div class="prod-bottom"><span class="prod-price">₹310</span><button class="prod-add" onclick="addToCart('Lemon Herb Pieces',310)">+</button></div></div>
+        <div class="prod-body"><h3>Lemon Herb Pieces</h3><p class="prod-desc">Light citrus & herb marination. Oven-ready.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.6 (89)</div><div class="prod-bottom"><div class="prod-price">₹380</div><button class="prod-add" onclick="addToCart('Lemon Herb Pieces',380)">+</button></div></div>
       </div>
       <div class="prod-card reveal" data-cat="chicken">
         <div class="prod-img">🦴<span class="prod-tag tag-fresh">Fresh</span></div>
-        <div class="prod-body"><h3>Chicken Keema (Mince)</h3><p class="prod-desc">Freshly minced, no fillers. 500g pack.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.8 (302)</div><div class="prod-bottom"><span class="prod-price">₹280</span><button class="prod-add" onclick="addToCart('Chicken Keema',280)">+</button></div></div>
+        <div class="prod-body"><h3>Chicken Keema (Mince)</h3><p class="prod-desc">Freshly minced, no fillers. 500g pack.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.8 (302)</div><div class="prod-bottom"><div class="prod-price">₹280</div><button class="prod-add" onclick="addToCart('Chicken Keema',280)">+</button></div></div>
       </div>
       <div class="prod-card reveal" data-cat="eggs">
         <div class="prod-img">🥚<span class="prod-tag tag-fresh">Fresh</span></div>
-        <div class="prod-body"><h3>White Eggs Tray (30)</h3><p class="prod-desc">Commercial white eggs, consistent sizing.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.5 (412)</div><div class="prod-bottom"><span class="prod-price">₹200</span><button class="prod-add" onclick="addToCart('White Eggs',200)">+</button></div></div>
+        <div class="prod-body"><h3>White Eggs Tray (30)</h3><p class="prod-desc">Commercial white eggs, consistent sizing.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.5 (412)</div><div class="prod-bottom"><div class="prod-price">₹180</div><button class="prod-add" onclick="addToCart('White Eggs Tray',180)">+</button></div></div>
       </div>
     </div>
   </div>
@@ -625,7 +833,7 @@
         <div class="d-zone"><span class="zone-name">Uppal / LB Nagar</span><span class="zone-time">3–5 hrs</span><span class="zone-fee">₹60</span></div>
         <div class="d-zone"><span class="zone-name">RR District Villages</span><span class="zone-time">Next Day</span><span class="zone-fee">₹80</span></div>
         <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:1rem;">Free delivery on orders above ₹500</p>
-        <button class="track-btn" onclick="openModal()">📍 Track My Order</button>
+        <button class="track-btn" onclick="openModal()"><i class="fa-solid fa-location-dot"></i> Track My Order</button>
       </div>
     </div>
   </div>
@@ -643,17 +851,17 @@
           <div class="supply-card"><div class="s-icon">🍽️</div><div><h4>Restaurants & Hotels</h4><p>Daily supply contracts, custom portioning</p></div><span class="s-badge">Popular</span></div>
           <div class="supply-card"><div class="s-icon">☁️</div><div><h4>Cloud Kitchens</h4><p>High-volume, consistent quality guaranteed</p></div><span class="s-badge">Hot</span></div>
           <div class="supply-card"><div class="s-icon">🏫</div><div><h4>Canteens & Institutions</h4><p>Schools, offices, hospitals — bulk pricing</p></div><span class="s-badge">Bulk</span></div>
-          <div class="supply-card"><div class="s-icon">🛒</div><div><h4>Retail & Supermarkets</h4><p>Packaged, labelled stock for shelves</p></div><span class="s-badge">Wholesale</span></div>
+          <div class="supply-card"><div class="s-icon"><i class="fa-solid fa-cart-shopping"></i></div><div><h4>Retail & Supermarkets</h4><p>Packaged, labelled stock for shelves</p></div><span class="s-badge">Wholesale</span></div>
         </div>
       </div>
       <div class="supply-form reveal-right">
-        <h3>📋 Get a Supply Quote</h3>
+        <h3><i class="fa-solid fa-clipboard-list"></i> Get a Supply Quote</h3>
         <div class="form-row">
           <div class="form-group"><label>Business Name</label><input type="text" placeholder="Your restaurant / company"></div>
           <div class="form-group"><label>Contact Name</label><input type="text" placeholder="Your name"></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 98765 43210"></div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 9398827510"></div>
           <div class="form-group"><label>City / Area</label><input type="text" placeholder="e.g. Banjara Hills"></div>
         </div>
         <div class="form-group"><label>Business Type</label>
@@ -674,7 +882,7 @@
           </div>
         </div>
         <div class="form-group"><label>Additional Requirements</label><textarea placeholder="Custom cuts, packaging, certifications needed..."></textarea></div>
-        <button class="btn-primary" style="width:100%;justify-content:center;font-size:0.95rem" onclick="submitQuote()">📩 Request Quote</button>
+        <button class="btn-primary" style="width:100%;justify-content:center;font-size:0.95rem" onclick="submitQuote()"><i class="fa-solid fa-envelope"></i> Request Quote</button>
       </div>
     </div>
   </div>
@@ -686,9 +894,9 @@
     <div class="section-label reveal">What People Say</div>
     <div class="section-title reveal">Trusted by Thousands</div>
     <div class="testimonials-grid">
-      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">The quality is unmatched. I've been ordering from Rao's for 3 years now. Always fresh, always on time!</p><div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Rajesh Kumar</div><div class="testi-role">Regular Customer</div></div></div></div>
-      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">We run a cloud kitchen and Rao's is our only chicken supplier. Their consistency and service are outstanding.</p><div class="testi-author"><div class="testi-avatar">P</div><div><div class="testi-name">Priya Sharma</div><div class="testi-role">Business Owner</div></div></div></div>
-      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">The marinated chicken pieces are amazing — ready to grill straight from the pack. Highly recommended!</p><div class="testi-author"><div class="testi-avatar">V</div><div><div class="testi-name">Vikram Singh</div><div class="testi-role">Home Chef</div></div></div></div>
+      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">The quality is unmatched. I've been ordering from Rao's for 3 years now. The country chicken is absolutely fresh and the delivery is always on time.</p><div class="testi-author"><div class="testi-avatar">SR</div><div><div class="testi-name">Suresh Reddy</div><div class="testi-role">Home Customer · Banjara Hills</div></div></div></div>
+      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">We run a cloud kitchen and Rao's is our only chicken supplier. Their bulk supply is reliable, fresh every day, and the pricing is great for commercial use.</p><div class="testi-author"><div class="testi-avatar">PK</div><div><div class="testi-name">Priya Krishna</div><div class="testi-role">Cloud Kitchen Owner · Gachibowli</div></div></div></div>
+      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">The marinated chicken pieces are amazing — ready to grill straight from the pack. The spicy marination is perfect Andhra-style. Highly recommended!</p><div class="testi-author"><div class="testi-avatar">AM</div><div><div class="testi-name">Anand Murthy</div><div class="testi-role">Home Customer · Kukatpally</div></div></div></div>
     </div>
   </div>
 </section>
@@ -703,13 +911,13 @@
         <div class="section-title">Multiple Ways<br>to <em style="color:var(--amber);font-style:normal">Order</em></div>
         <div class="section-sub">Choose the most convenient way to place your order. We're available 6 AM – 8 PM, 7 days a week.</div>
         <div class="order-options">
-          <div class="order-option active" onclick="selectOption(this)"><div class="oo-icon">🌐</div><h4>Online Order</h4><p>Order from website, pay online</p></div>
-          <div class="order-option" onclick="selectOption(this)"><div class="oo-icon">📱</div><h4>WhatsApp Order</h4><p>Chat +91 98765 43210</p></div>
-          <div class="order-option" onclick="selectOption(this)"><div class="oo-icon">📞</div><h4>Phone Order</h4><p>Call us directly</p></div>
+          <div class="order-option active" onclick="selectOption(this)"><div class="oo-icon"><i class="fa-solid fa-globe"></i></div><h4>Online Order</h4><p>Order from website, pay online</p></div>
+          <div class="order-option" onclick="selectOption(this)"><div class="oo-icon"><i class="fa-brands fa-whatsapp"></i></div><h4>WhatsApp Order</h4><p>Chat +91 9398827510</p></div>
+          <div class="order-option" onclick="selectOption(this)"><div class="oo-icon"><i class="fa-solid fa-phone"></i></div><h4>Phone Order</h4><p>Call us directly</p></div>
           <div class="order-option" onclick="selectOption(this)"><div class="oo-icon">🏪</div><h4>Walk-in</h4><p>Visit our farm shop</p></div>
         </div>
         <div style="margin-top:2rem">
-          <a href="tel:+919876543210" class="btn-primary">📞 Call to Order</a>
+          <a href="tel:+919876543210" class="btn-primary"><i class="fa-solid fa-phone"></i> Call to Order</a>
         </div>
       </div>
       <div class="cart-mockup reveal-right" id="cartPanel">
@@ -721,7 +929,7 @@
           <span class="ct-label">Subtotal</span>
           <span class="ct-val" id="cartTotal">₹0</span>
         </div>
-        <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" style="display:none">🛒 Proceed to Checkout →</button>
+        <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" style="display:none"><i class="fa-solid fa-cart-shopping"></i> Proceed to Checkout →</button>
       </div>
     </div>
   </div>
@@ -732,7 +940,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem"><div style="width:40px;height:40px;background:var(--amber);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.6rem">🐓</div><div class="logo-text">Rao's Poultry Farm</div></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem"><div style="width:40px;height:40px;background:var(--amber);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">🐓</div><span style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff">Rao's Poultry Farm</span></div>
         <p>Farm-fresh chicken delivered to your door since 2008. Raising birds the right way — natural, healthy, humane.</p>
         <div style="margin-top:1rem;font-size:0.78rem;color:rgba(255,255,255,0.35)">FSSAI Lic. No. 10019022001234</div>
       </div>
@@ -754,13 +962,23 @@
       </div>
       <div class="footer-col">
         <h4>Contact Us</h4>
-        <p>📍 Rao's Poultry Farm, Chevella Road, RR District, Hyderabad — 501503</p>
-        <p style="margin-top:0.75rem">📞 +91 98765 43210</p>
+        <p><i class="fa-solid fa-location-dot"></i> Rao's Poultry Farm, Veeranarayanpur, Warangal</p>
+        <p style="margin-top:0.75rem"><i class="fa-solid fa-phone"></i> +91 9398827510</p>
         <p style="margin-top:0.3rem">📧 orders@raospoultryfarm.in</p>
         <p style="margin-top:0.3rem">⏰ 6 AM – 8 PM, Daily</p>
       </div>
     </div>
-    <div class="footer-bottom">
+    
+<div style="margin-top:2rem;padding:1.5rem;background:rgba(255,255,255,0.05);border-radius:16px;border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+  <img src="Rahul.jpg" alt="Owner Rahul" style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:4px solid #E8841A;">
+  <div>
+    <h3 style="font-size:1.2rem;color:#fff;margin-bottom:0.3rem"><i class="fa-solid fa-user"></i> Owner: P. Rahul</h3>
+    <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);margin-bottom:0.3rem"><i class="fa-solid fa-phone"></i> +91 9398827510</p>
+    <p style="font-size:0.9rem;color:rgba(255,255,255,0.7)"><i class="fa-solid fa-location-dot"></i> Veeranarayanpur, Warangal</p>
+  </div>
+</div>
+
+<div class="footer-bottom">
       <p>© 2024 Rao's Poultry Farm. All rights reserved. Made with ❤️ in Hyderabad.</p>
       <div class="footer-socials">
         <a class="social-btn" href="#" title="Instagram">📷</a>
@@ -776,7 +994,7 @@
 <div class="modal-overlay" id="trackModal" onclick="closeModal(event)">
   <div class="modal">
     <button class="modal-close" onclick="closeModalBtn()">✕</button>
-    <h2>📍 Track Your Order</h2>
+    <h2><i class="fa-solid fa-location-dot"></i> Track Your Order</h2>
     <p>Enter your order ID or phone number to get live delivery status.</p>
     <div class="form-group"><label>Order ID / Phone Number</label><input type="text" id="trackInput" placeholder="e.g. RPF20241234 or 9876543210"></div>
     <button class="btn-primary" style="width:100%;justify-content:center" onclick="trackOrder()">🔍 Track Order</button>
@@ -879,7 +1097,7 @@
   function checkout() {
     showToast('🎉 Proceeding to checkout...');
     setTimeout(() => {
-      alert('Thank you for your order!\n\nOur team will call you within 10 minutes to confirm.\n\nFor immediate assistance:\n📞 +91 98765 43210\n💬 WhatsApp: +91 98765 43210');
+      alert('Thank you for your order!\n\nOur team will call you within 10 minutes to confirm.\n\nFor immediate assistance:\n<i class="fa-solid fa-phone"></i> +91 9398827510\n💬 WhatsApp: +91 9398827510');
     }, 500);
   }
 
@@ -908,6 +1126,19 @@
     el.classList.add('active');
   }
 
+  
+  // MOBILE MENU
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('show');
+  }
+
+  document.querySelectorAll('#mobileMenu a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('show');
+    });
+  });
+
+
   // MODAL
   function openModal() {
     document.getElementById('trackModal').classList.add('open');
@@ -925,13 +1156,13 @@
     res.style.display = 'block';
     res.innerHTML = '🔄 Looking up order...';
     setTimeout(() => {
-      res.innerHTML = `<strong>Order #RPF20241234</strong><br>📦 Status: <strong>Out for Delivery</strong><br>🚗 Driver: Ravi Kumar · ETA: 25 mins<br>📍 Currently near Begumpet flyover`;
+      res.innerHTML = `<strong>Order #RPF20241234</strong><br>📦 Status: <strong>Out for Delivery</strong><br>🚗 Driver: Ravi Kumar · ETA: 25 mins<br><i class="fa-solid fa-location-dot"></i> Currently near Begumpet flyover`;
     }, 1200);
   }
 
   // SUPPLY QUOTE
   function submitQuote() {
-    showToast('📩 Quote request sent! We will call within 2 hours.');
+    showToast('<i class="fa-solid fa-envelope"></i> Quote request sent! We will call within 2 hours.');
   }
 </script>
 </body>
