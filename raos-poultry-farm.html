@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rao's Poultry Farm – Fresh From the Farm</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FBF5EC;
+    --warm-white: #FFFDF9;
+    --amber: #E8841A;
+    --amber-dark: #C4650A;
+    --amber-light: #FDF0DC;
+    --rust: #B84214;
+    --green: #2D5016;
+    --green-mid: #4A7C2A;
+    --green-light: #EAF2DC;
+    --brown: #5C3A1E;
+    --brown-light: #F5EDE0;
+    --text-dark: #1A1208;
+    --text-mid: #4A3522;
+    --text-muted: #8B7355;
+    --border: rgba(92,58,30,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family:'DM Sans',sans-serif; background:var(--warm-white); color:var(--text-dark); overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(251,245,236,0.92); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow:0 4px 24px rgba(92,58,30,0.10); }
+  .nav-inner { max-width:1280px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .logo-icon { width:44px; height:44px; background:var(--amber); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; }
+  .logo-text { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--text-dark); line-height:1.1; }
+  .logo-sub { font-size:0.65rem; font-weight:400; color:var(--text-muted); letter-spacing:0.1em; text-transform:uppercase; display:block; }
+  .nav-links { display:flex; align-items:center; gap:2rem; }
+  .nav-links a { text-decoration:none; font-size:0.9rem; font-weight:500; color:var(--text-mid); transition:color 0.2s; }
+  .nav-links a:hover { color:var(--amber); }
+  .nav-cta { background:var(--amber); color:#fff; padding:0.55rem 1.4rem; border-radius:8px; font-weight:600; font-size:0.88rem; text-decoration:none; transition:background 0.2s,transform 0.15s; }
+  .nav-cta:hover { background:var(--amber-dark); transform:translateY(-1px); color:#fff; }
+  .nav-badge { background:var(--rust); color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:4px; font-weight:600; vertical-align:middle; }
+
+  /* HERO */
+  .hero {
+    min-height:100vh; display:flex; align-items:center;
+    background:var(--cream);
+    position:relative; overflow:hidden;
+    padding:6rem 2rem 4rem;
+  }
+  .hero-bg {
+    position:absolute; inset:0; pointer-events:none;
+    background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(232,132,26,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 10% 80%, rgba(74,124,42,0.07) 0%, transparent 70%);
+  }
+  .hero-dots {
+    position:absolute; right:0; top:50%; transform:translateY(-50%);
+    width:420px; height:420px; pointer-events:none; opacity:0.06;
+    background-image: radial-gradient(circle, var(--amber) 1.5px, transparent 1.5px);
+    background-size:24px 24px;
+  }
+  .hero-inner { max-width:1280px; margin:0 auto; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--amber-light); border:1px solid rgba(232,132,26,0.25);
+    border-radius:100px; padding:6px 16px 6px 8px;
+    font-size:0.78rem; font-weight:600; color:var(--amber-dark);
+    margin-bottom:1.5rem;
+    animation: fadeSlideUp 0.7s ease both;
+  }
+  .hero-badge span.dot { width:8px; height:8px; background:var(--amber); border-radius:50%; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .hero h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.6rem,4.5vw,4rem);
+    font-weight:900; line-height:1.1;
+    color:var(--text-dark);
+    animation: fadeSlideUp 0.7s 0.1s ease both;
+  }
+  .hero h1 em { color:var(--amber); font-style:normal; }
+  .hero-sub {
+    margin-top:1.2rem; font-size:1.05rem; color:var(--text-muted);
+    line-height:1.7; max-width:480px;
+    animation: fadeSlideUp 0.7s 0.2s ease both;
+  }
+  .hero-actions {
+    display:flex; gap:1rem; margin-top:2.2rem; flex-wrap:wrap;
+    animation: fadeSlideUp 0.7s 0.3s ease both;
+  }
+  .btn-primary { background:var(--amber); color:#fff; padding:0.85rem 2rem; border-radius:10px; font-weight:600; font-size:0.95rem; text-decoration:none; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s,box-shadow 0.2s; box-shadow:0 4px 16px rgba(232,132,26,0.3); display:inline-flex; align-items:center; gap:8px; }
+  .btn-primary:hover { background:var(--amber-dark); transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,132,26,0.4); }
+  .btn-secondary { background:transparent; color:var(--text-dark); padding:0.85rem 2rem; border-radius:10px; font-weight:600; font-size:0.95rem; text-decoration:none; border:2px solid var(--border); cursor:pointer; transition:border-color 0.2s,transform 0.15s,background 0.2s; display:inline-flex; align-items:center; gap:8px; }
+  .btn-secondary:hover { border-color:var(--amber); background:var(--amber-light); transform:translateY(-2px); }
+  .hero-stats {
+    display:flex; gap:2.5rem; margin-top:2.8rem;
+    animation: fadeSlideUp 0.7s 0.4s ease both;
+  }
+  .hero-stat { }
+  .hero-stat .num { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:700; color:var(--text-dark); }
+  .hero-stat .lbl { font-size:0.78rem; color:var(--text-muted); font-weight:500; letter-spacing:0.03em; }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    display:flex; flex-direction:column; gap:1rem;
+    animation: fadeSlideIn 0.9s 0.2s ease both;
+  }
+  @keyframes fadeSlideIn { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+  @keyframes fadeSlideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  .product-card-big {
+    background:#fff; border-radius:20px; border:1px solid var(--border);
+    overflow:hidden; transition:transform 0.3s,box-shadow 0.3s;
+  }
+  .product-card-big:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(92,58,30,0.12); }
+  .product-card-big .img-area {
+    height:220px; background:linear-gradient(135deg,#FDF0DC,#F5EDE0);
+    display:flex; align-items:center; justify-content:center; font-size:7rem; position:relative;
+  }
+  .product-card-big .img-area .fresh-tag {
+    position:absolute; top:12px; left:12px;
+    background:var(--green); color:#fff;
+    font-size:0.7rem; font-weight:700; padding:4px 10px; border-radius:6px;
+    text-transform:uppercase; letter-spacing:0.05em;
+  }
+  .product-card-big .img-area .discount-tag {
+    position:absolute; top:12px; right:12px;
+    background:var(--rust); color:#fff;
+    font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:6px;
+  }
+  .product-card-big .card-body { padding:1.25rem 1.5rem; }
+  .product-card-big .card-body h3 { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; }
+  .product-card-big .card-body p { font-size:0.85rem; color:var(--text-muted); margin-top:4px; }
+  .card-footer { display:flex; align-items:center; justify-content:space-between; margin-top:1rem; }
+  .price { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--amber-dark); }
+  .price span { font-size:0.85rem; font-family:'DM Sans',sans-serif; color:var(--text-muted); font-weight:400; }
+  .add-btn { background:var(--amber); color:#fff; border:none; padding:0.5rem 1.1rem; border-radius:8px; font-weight:600; font-size:0.85rem; cursor:pointer; transition:background 0.2s,transform 0.15s; }
+  .add-btn:hover { background:var(--amber-dark); transform:scale(1.05); }
+
+  .mini-cards { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .mini-card {
+    background:#fff; border-radius:14px; border:1px solid var(--border);
+    padding:1rem; transition:transform 0.3s,box-shadow 0.2s;
+  }
+  .mini-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(92,58,30,0.1); }
+  .mini-card .mc-icon { font-size:2.2rem; margin-bottom:8px; }
+  .mini-card h4 { font-size:0.9rem; font-weight:600; }
+  .mini-card p { font-size:0.78rem; color:var(--text-muted); margin-top:2px; }
+  .mini-card .mc-price { font-weight:700; color:var(--amber-dark); font-size:0.88rem; margin-top:8px; }
+
+  /* MARQUEE */
+  .marquee-strip {
+    background:var(--green); color:#fff;
+    padding:12px 0; overflow:hidden;
+    display:flex;
+  }
+  .marquee-track {
+    display:flex; gap:3rem; white-space:nowrap;
+    animation: marquee 20s linear infinite;
+    font-size:0.82rem; font-weight:500; letter-spacing:0.05em; text-transform:uppercase;
+  }
+  @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .marquee-item { display:flex; align-items:center; gap:10px; }
+  .marquee-dot { width:6px; height:6px; background:var(--amber); border-radius:50%; flex-shrink:0; }
+
+  /* SECTION COMMONS */
+  section { padding:6rem 2rem; }
+  .container { max-width:1280px; margin:0 auto; }
+  .section-label { font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--amber); margin-bottom:0.6rem; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,3vw,2.8rem); font-weight:700; line-height:1.2; color:var(--text-dark); }
+  .section-sub { font-size:1rem; color:var(--text-muted); margin-top:0.6rem; max-width:520px; line-height:1.7; }
+
+  /* WHY US */
+  .why-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:3.5rem; }
+  .why-card {
+    background:var(--cream); border-radius:16px; padding:1.75rem;
+    border:1px solid var(--border); transition:all 0.3s;
+    position:relative; overflow:hidden;
+  }
+  .why-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--amber); transform:scaleX(0); transition:transform 0.3s; transform-origin:left; }
+  .why-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(92,58,30,0.1); }
+  .why-card:hover::before { transform:scaleX(1); }
+  .why-icon { width:52px; height:52px; background:var(--amber-light); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin-bottom:1rem; }
+  .why-card h3 { font-size:1rem; font-weight:600; margin-bottom:0.4rem; }
+  .why-card p { font-size:0.85rem; color:var(--text-muted); line-height:1.6; }
+
+  /* PRODUCTS */
+  .products-section { background:var(--cream); }
+  .products-tabs { display:flex; gap:0.5rem; margin-top:2rem; flex-wrap:wrap; }
+  .tab-btn {
+    padding:0.5rem 1.2rem; border-radius:8px; border:1px solid var(--border);
+    background:#fff; font-size:0.85rem; font-weight:500; cursor:pointer;
+    transition:all 0.2s; color:var(--text-muted);
+  }
+  .tab-btn.active, .tab-btn:hover { background:var(--amber); color:#fff; border-color:var(--amber); }
+  .products-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:2rem; }
+  .prod-card {
+    background:#fff; border-radius:16px; border:1px solid var(--border);
+    overflow:hidden; transition:all 0.3s; cursor:pointer;
+  }
+  .prod-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(92,58,30,0.12); }
+  .prod-img {
+    height:160px; display:flex; align-items:center; justify-content:center;
+    background:var(--brown-light); font-size:4.5rem; position:relative;
+  }
+  .prod-tag { position:absolute; top:10px; left:10px; font-size:0.65rem; font-weight:700; padding:3px 8px; border-radius:5px; text-transform:uppercase; letter-spacing:0.05em; }
+  .tag-fresh { background:var(--green-light); color:var(--green); }
+  .tag-bestseller { background:#FFF0DC; color:var(--amber-dark); }
+  .tag-new { background:#FFE4E4; color:var(--rust); }
+  .prod-body { padding:1rem 1.1rem 1.2rem; }
+  .prod-body h3 { font-size:0.95rem; font-weight:600; }
+  .prod-body .prod-desc { font-size:0.78rem; color:var(--text-muted); margin-top:3px; line-height:1.5; }
+  .prod-bottom { display:flex; align-items:center; justify-content:space-between; margin-top:0.8rem; }
+  .prod-price { font-weight:700; font-size:1.05rem; color:var(--amber-dark); font-family:'Playfair Display',serif; }
+  .prod-price del { font-size:0.75rem; font-family:'DM Sans',sans-serif; color:var(--text-muted); font-weight:400; margin-left:4px; }
+  .prod-add { background:var(--green); color:#fff; border:none; width:32px; height:32px; border-radius:8px; font-size:1.2rem; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .prod-add:hover { background:var(--green-mid); transform:scale(1.1); }
+  .prod-rating { font-size:0.75rem; color:var(--text-muted); margin-top:4px; }
+  .stars { color:#F5A623; letter-spacing:-1px; }
+
+  /* DELIVERY SECTION */
+  .delivery-section { background:var(--green); color:#fff; position:relative; overflow:hidden; }
+  .delivery-section .bg-pattern {
+    position:absolute; inset:0; opacity:0.04;
+    background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+    background-size:30px 30px;
+  }
+  .delivery-inner { display:grid; grid-template-columns:1.1fr 0.9fr; gap:5rem; align-items:center; }
+  .delivery-section .section-label { color:var(--amber); }
+  .delivery-section .section-title { color:#fff; }
+  .delivery-section .section-sub { color:rgba(255,255,255,0.7); }
+  .delivery-steps { margin-top:2.5rem; display:flex; flex-direction:column; gap:1.2rem; }
+  .d-step { display:flex; align-items:flex-start; gap:1rem; }
+  .d-num { width:36px; height:36px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; color:var(--amber); flex-shrink:0; }
+  .d-step h4 { font-size:0.95rem; font-weight:600; color:#fff; }
+  .d-step p { font-size:0.82rem; color:rgba(255,255,255,0.6); margin-top:2px; line-height:1.5; }
+  .delivery-card {
+    background:rgba(255,255,255,0.07); backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.15); border-radius:20px;
+    padding:2rem;
+  }
+  .delivery-card h3 { font-family:'Playfair Display',serif; font-size:1.4rem; color:#fff; margin-bottom:1.2rem; }
+  .d-zone { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 0; border-bottom:1px solid rgba(255,255,255,0.1); }
+  .d-zone:last-child { border-bottom:none; }
+  .d-zone .zone-name { font-size:0.88rem; color:rgba(255,255,255,0.8); }
+  .d-zone .zone-time { font-size:0.85rem; font-weight:600; color:var(--amber); }
+  .d-zone .zone-fee { font-size:0.78rem; color:rgba(255,255,255,0.5); background:rgba(255,255,255,0.08); padding:2px 8px; border-radius:5px; }
+  .track-btn { width:100%; margin-top:1.5rem; background:var(--amber); color:#fff; border:none; padding:0.8rem; border-radius:10px; font-weight:600; font-size:0.9rem; cursor:pointer; transition:all 0.2s; }
+  .track-btn:hover { background:var(--amber-dark); transform:translateY(-1px); }
+
+  /* SUPPLY / B2B */
+  .supply-section { background:var(--warm-white); }
+  .supply-inner { display:grid; grid-template-columns:0.9fr 1.1fr; gap:5rem; align-items:center; }
+  .supply-cards { display:flex; flex-direction:column; gap:1rem; }
+  .supply-card {
+    background:#fff; border-radius:14px; border:1px solid var(--border);
+    padding:1.25rem 1.5rem; display:flex; align-items:center; gap:1.2rem;
+    transition:all 0.3s;
+  }
+  .supply-card:hover { transform:translateX(6px); border-color:var(--amber); box-shadow:0 4px 20px rgba(232,132,26,0.1); }
+  .supply-card .s-icon { width:50px; height:50px; border-radius:12px; background:var(--amber-light); display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; }
+  .supply-card h4 { font-size:0.95rem; font-weight:600; }
+  .supply-card p { font-size:0.8rem; color:var(--text-muted); margin-top:2px; }
+  .supply-card .s-badge { margin-left:auto; font-size:0.68rem; font-weight:700; background:var(--green-light); color:var(--green); padding:3px 8px; border-radius:5px; flex-shrink:0; text-transform:uppercase; letter-spacing:0.04em; }
+  .supply-form {
+    background:var(--cream); border-radius:20px; padding:2.5rem;
+    border:1px solid var(--border);
+  }
+  .supply-form h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; margin-bottom:1.5rem; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .form-group { margin-bottom:1rem; }
+  .form-group label { font-size:0.8rem; font-weight:600; color:var(--text-muted); display:block; margin-bottom:5px; text-transform:uppercase; letter-spacing:0.05em; }
+  .form-group input, .form-group select, .form-group textarea {
+    width:100%; padding:0.7rem 1rem; border:1px solid var(--border);
+    border-radius:8px; font-family:'DM Sans',sans-serif; font-size:0.9rem;
+    background:#fff; color:var(--text-dark); outline:none;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color:var(--amber); box-shadow:0 0 0 3px rgba(232,132,26,0.12);
+  }
+  .form-group textarea { resize:vertical; min-height:80px; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background:var(--cream); }
+  .testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+  .testi-card {
+    background:#fff; border-radius:16px; padding:1.75rem;
+    border:1px solid var(--border); transition:all 0.3s;
+    position:relative;
+  }
+  .testi-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(92,58,30,0.1); }
+  .testi-quote { font-size:2.5rem; color:var(--amber-light); font-family:'Playfair Display',serif; line-height:1; position:absolute; top:1rem; right:1.5rem; }
+  .testi-stars { color:#F5A623; font-size:0.9rem; margin-bottom:0.75rem; }
+  .testi-text { font-size:0.9rem; color:var(--text-mid); line-height:1.7; font-style:italic; }
+  .testi-author { display:flex; align-items:center; gap:0.75rem; margin-top:1.25rem; }
+  .testi-avatar { width:40px; height:40px; border-radius:50%; background:var(--amber-light); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; color:var(--amber-dark); flex-shrink:0; }
+  .testi-name { font-weight:600; font-size:0.88rem; }
+  .testi-role { font-size:0.75rem; color:var(--text-muted); }
+
+  /* ORDER SECTION */
+  .order-section { background:var(--brown); color:#fff; position:relative; overflow:hidden; }
+  .order-section .bg-line { position:absolute; inset:0; pointer-events:none; opacity:0.05; background:repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%); background-size:20px 20px; }
+  .order-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+  .order-section .section-label { color:var(--amber); }
+  .order-section .section-title { color:#fff; }
+  .order-section .section-sub { color:rgba(255,255,255,0.65); }
+  .order-options { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2rem; }
+  .order-option {
+    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12);
+    border-radius:14px; padding:1.4rem; cursor:pointer;
+    transition:all 0.2s; text-align:center;
+  }
+  .order-option:hover, .order-option.active { background:rgba(232,132,26,0.2); border-color:var(--amber); }
+  .order-option .oo-icon { font-size:2rem; margin-bottom:0.5rem; }
+  .order-option h4 { font-size:0.88rem; font-weight:600; color:#fff; }
+  .order-option p { font-size:0.75rem; color:rgba(255,255,255,0.55); margin-top:3px; }
+  .cart-mockup {
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15);
+    border-radius:20px; padding:1.75rem;
+  }
+  .cart-mockup h3 { color:#fff; font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:1.2rem; display:flex; align-items:center; justify-content:space-between; }
+  .cart-badge { background:var(--amber); color:#fff; font-size:0.65rem; font-family:'DM Sans',sans-serif; padding:2px 8px; border-radius:5px; font-weight:700; }
+  .cart-item { display:flex; align-items:center; gap:1rem; padding:0.75rem 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .cart-item:last-child { border-bottom:none; }
+  .ci-img { width:40px; height:40px; background:rgba(255,255,255,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; }
+  .ci-name { font-size:0.85rem; color:#fff; font-weight:500; flex:1; }
+  .ci-qty { font-size:0.75rem; color:rgba(255,255,255,0.5); }
+  .ci-price { font-size:0.9rem; font-weight:700; color:var(--amber); }
+  .ci-ctrl { display:flex; align-items:center; gap:6px; margin-top:3px; }
+  .ci-btn { background:rgba(255,255,255,0.1); border:none; color:#fff; width:22px; height:22px; border-radius:5px; cursor:pointer; font-size:0.85rem; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+  .ci-btn:hover { background:rgba(255,255,255,0.2); }
+  .cart-total { margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:space-between; }
+  .ct-label { color:rgba(255,255,255,0.6); font-size:0.85rem; }
+  .ct-val { color:#fff; font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; }
+  .checkout-btn { width:100%; margin-top:1rem; background:var(--amber); color:#fff; border:none; padding:0.85rem; border-radius:10px; font-weight:700; font-size:0.95rem; cursor:pointer; transition:all 0.2s; }
+  .checkout-btn:hover { background:var(--amber-dark); transform:translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    background:var(--text-dark); color:#fff;
+    padding:4rem 2rem 2rem;
+  }
+  .footer-inner { max-width:1280px; margin:0 auto; }
+  .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
+  .footer-brand .logo-text { font-size:1.3rem; color:#fff; }
+  .footer-brand p { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.7; margin-top:0.75rem; max-width:280px; }
+  .footer-col h4 { font-size:0.78rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-bottom:1rem; }
+  .footer-col a { display:block; font-size:0.85rem; color:rgba(255,255,255,0.55); text-decoration:none; margin-bottom:0.5rem; transition:color 0.2s; }
+  .footer-col a:hover { color:var(--amber); }
+  .footer-col p { font-size:0.85rem; color:rgba(255,255,255,0.55); line-height:1.6; }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding-top:1.5rem; display:flex; align-items:center; justify-content:space-between; }
+  .footer-bottom p { font-size:0.8rem; color:rgba(255,255,255,0.35); }
+  .footer-socials { display:flex; gap:0.75rem; }
+  .social-btn { width:36px; height:36px; background:rgba(255,255,255,0.08); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1rem; text-decoration:none; transition:background 0.2s; }
+  .social-btn:hover { background:var(--amber); }
+
+  /* CART FLOATER */
+  .cart-floater {
+    position:fixed; bottom:2rem; right:2rem; z-index:999;
+    background:var(--amber); color:#fff;
+    width:60px; height:60px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; cursor:pointer;
+    box-shadow:0 8px 24px rgba(232,132,26,0.5);
+    transition:transform 0.2s,box-shadow 0.2s;
+    border:none;
+  }
+  .cart-floater:hover { transform:scale(1.1); box-shadow:0 12px 32px rgba(232,132,26,0.6); }
+  .cart-count {
+    position:absolute; top:-4px; right:-4px;
+    background:var(--rust); color:#fff;
+    width:22px; height:22px; border-radius:50%;
+    font-size:0.65rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+    animation:bounce 0.3s ease;
+  }
+  @keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+
+  /* TOAST */
+  .toast {
+    position:fixed; top:5.5rem; right:2rem; z-index:9999;
+    background:var(--green); color:#fff;
+    padding:0.8rem 1.4rem; border-radius:10px;
+    font-size:0.88rem; font-weight:500;
+    box-shadow:0 8px 24px rgba(0,0,0,0.2);
+    transform:translateX(120%); transition:transform 0.3s ease;
+    display:flex; align-items:center; gap:8px;
+  }
+  .toast.show { transform:translateX(0); }
+
+  /* MODAL */
+  .modal-overlay {
+    position:fixed; inset:0; z-index:2000;
+    background:rgba(0,0,0,0.6); backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity 0.3s;
+  }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal {
+    background:#fff; border-radius:20px; padding:2.5rem;
+    max-width:480px; width:90%;
+    transform:scale(0.9) translateY(20px); transition:transform 0.3s;
+  }
+  .modal-overlay.open .modal { transform:scale(1) translateY(0); }
+  .modal h2 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:0.5rem; }
+  .modal p { font-size:0.9rem; color:var(--text-muted); margin-bottom:1.5rem; }
+  .modal-close { position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text-muted); transition:color 0.2s; }
+  .modal-close:hover { color:var(--text-dark); }
+  .modal { position:relative; }
+
+  /* SCROLL ANIMATIONS */
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-left { opacity:0; transform:translateX(-30px); transition:opacity 0.6s ease,transform 0.6s ease; }
+  .reveal-left.visible { opacity:1; transform:translateX(0); }
+  .reveal-right { opacity:0; transform:translateX(30px); transition:opacity 0.6s ease,transform 0.6s ease; }
+  .reveal-right.visible { opacity:1; transform:translateX(0); }
+
+  /* COUNTER ANIMATION */
+  @keyframes countUp { from { opacity:0 } to { opacity:1 } }
+
+  .section-header-row { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">🐓</div>
+      <div class="logo-text">Rao's Poultry Farm<span class="logo-sub">Est. 2008 · Hyderabad</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#products">Shop</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#supply">Bulk Supply</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#order" class="nav-cta">Order Now <span class="nav-badge">LIVE</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Added to cart!</div>
+
+<!-- CART FLOATER -->
+<button class="cart-floater" onclick="scrollToOrder()" id="cartFloater">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner container">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Farm-fresh delivery — same day</div>
+      <h1>Premium Chicken,<br><em>Direct From Our Farm</em><br>to Your Table</h1>
+      <p class="hero-sub">Rao's Poultry Farm brings you the freshest, naturally raised chicken in Hyderabad. Order online for same-day delivery or schedule bulk supply for your business.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn-primary">🛍️ Shop Now</a>
+        <a href="#supply" class="btn-secondary">📦 Bulk Orders</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num" data-target="15">0</div><div class="lbl">Years of Trust</div></div>
+        <div class="hero-stat"><div class="num" data-target="5000">0</div><div class="lbl">Happy Customers</div></div>
+        <div class="hero-stat"><div class="num" data-target="50">0</div><div class="lbl">+ Products</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="product-card-big">
+        <div class="img-area">
+          🍗
+          <span class="fresh-tag">✓ Farm Fresh</span>
+          <span class="discount-tag">10% OFF</span>
+        </div>
+        <div class="card-body">
+          <h3>Whole Broiler Chicken</h3>
+          <p>Naturally raised · No hormones · Live weight ~1.5kg</p>
+          <div class="card-footer">
+            <div class="price">₹220 <span>/ kg</span></div>
+            <button class="add-btn" onclick="addToCart('Whole Broiler Chicken',220)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="mc-icon">🥚</div>
+          <h4>Desi Eggs</h4>
+          <p>Free-range farm eggs</p>
+          <div class="mc-price">₹8 / piece</div>
+        </div>
+        <div class="mini-card">
+          <div class="mc-icon">🍖</div>
+          <h4>Boneless Cuts</h4>
+          <p>Cleaned & marinated</p>
+          <div class="mc-price">₹380 / kg</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item"><span class="marquee-dot"></span> Same-Day Delivery in Hyderabad</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> 100% Antibiotic Free</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Bulk Supply Available</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Custom Cuts on Request</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> FSSAI Certified Farm</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Free Delivery Above ₹500</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Same-Day Delivery in Hyderabad</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> 100% Antibiotic Free</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Bulk Supply Available</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Custom Cuts on Request</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> FSSAI Certified Farm</span>
+    <span class="marquee-item"><span class="marquee-dot"></span> Free Delivery Above ₹500</span>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section id="about">
+  <div class="container">
+    <div class="section-label reveal">Why Choose Rao's</div>
+    <div class="section-header-row">
+      <div>
+        <div class="section-title reveal">Freshness You Can <em style="color:var(--amber);font-style:normal">Taste</em></div>
+        <div class="section-sub reveal">From our farm to your kitchen in hours — we raise, process, and deliver with unmatched care.</div>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="why-icon">🌿</div><h3>No Hormones or Antibiotics</h3><p>Our birds are raised naturally on wholesome grain feed without any growth hormones or antibiotics.</p></div>
+      <div class="why-card reveal"><div class="why-icon">❄️</div><h3>Cold-Chain Delivery</h3><p>Every order is packed in insulated boxes with ice packs, maintaining safe temperatures throughout delivery.</p></div>
+      <div class="why-card reveal"><div class="why-icon">📋</div><h3>FSSAI Certified</h3><p>Our farm and processing unit are certified by FSSAI, ensuring the highest food safety standards.</p></div>
+      <div class="why-card reveal"><div class="why-icon">⚡</div><h3>Same-Day Delivery</h3><p>Order before 12 PM and receive fresh chicken at your doorstep the same day across Hyderabad.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-label reveal">Our Products</div>
+    <div class="section-header-row">
+      <div>
+        <div class="section-title reveal">Fresh From the Farm</div>
+        <div class="section-sub reveal">All products freshly processed daily. Custom cuts available on request.</div>
+      </div>
+      <div class="products-tabs reveal">
+        <button class="tab-btn active" onclick="filterProducts('all',this)">All</button>
+        <button class="tab-btn" onclick="filterProducts('chicken',this)">Chicken</button>
+        <button class="tab-btn" onclick="filterProducts('eggs',this)">Eggs</button>
+        <button class="tab-btn" onclick="filterProducts('marinated',this)">Marinated</button>
+      </div>
+    </div>
+    <div class="products-grid" id="productsGrid">
+      <div class="prod-card reveal" data-cat="chicken">
+        <div class="prod-img">🐓<span class="prod-tag tag-bestseller">Bestseller</span></div>
+        <div class="prod-body"><h3>Country Chicken (Nati)</h3><p class="prod-desc">Free-range, slow-grown. Full of flavour.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.9 (312)</div><div class="prod-bottom"><div class="prod-price">₹480<del>₹550</del></div><button class="prod-add" onclick="addToCart('Country Chicken',480)">+</button></div></div>
+      </div>
+      <div class="prod-card reveal" data-cat="chicken">
+        <div class="prod-img">🍗<span class="prod-tag tag-fresh">Fresh</span></div>
+        <div class="prod-body"><h3>Broiler Whole</h3><p class="prod-desc">Standard broiler, dressed & cleaned.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.7 (528)</div><div class="prod-bottom"><div class="prod-price">₹220<del>₹260</del></div><button class="prod-add" onclick="addToCart('Broiler Whole',220)">+</button></div></div>
+      </div>
+      <div class="prod-card reveal" data-cat="chicken">
+        <div class="prod-img">🍖<span class="prod-tag tag-new">New</span></div>
+        <div class="prod-body"><h3>Boneless Breast</h3><p class="prod-desc">Skinless, fat-trimmed, cut to 200g pieces.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.8 (198)</div><div class="prod-bottom"><div class="prod-price">₹400</div><button class="prod-add" onclick="addToCart('Boneless Breast',400)">+</button></div></div>
+      </div>
+      <div class="prod-card reveal" data-cat="eggs">
+        <div class="prod-img">🥚<span class="prod-tag tag-fresh">Fresh</span></div>
+        <div class="prod-body"><h3>Desi Eggs (30 pcs)</h3><p class="prod-desc">Free-range brown eggs, high protein yolk.</p><div class="prod-rating"><span class="stars">★★★★★</span> 5.0 (740)</div><div class="prod-bottom"><div class="prod-price">₹240</div><button class="prod-add" onclick="addToCart('Desi Eggs 30pc',240)">+</button></div></div>
+      </div>
+      <div class="prod-card reveal" data-cat="marinated">
+        <div class="prod-img">🌶️<span class="prod-tag tag-bestseller">Hot Pick</span></div>
+        <div class="prod-body"><h3>Spicy Marinated Legs</h3><p class="prod-desc">Andhra-style red chili marination. Grill-ready.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.9 (256)</div><div class="prod-bottom"><div class="prod-price">₹360</div><button class="prod-add" onclick="addToCart('Spicy Marinated Legs',360)">+</button></div></div>
+      </div>
+      <div class="prod-card reveal" data-cat="marinated">
+        <div class="prod-img">🍋<span class="prod-tag tag-new">New</span></div>
+        <div class="prod-body"><h3>Lemon Herb Pieces</h3><p class="prod-desc">Light citrus & herb marination. Oven-ready.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.6 (89)</div><div class="prod-bottom"><div class="prod-price">₹380</div><button class="prod-add" onclick="addToCart('Lemon Herb Pieces',380)">+</button></div></div>
+      </div>
+      <div class="prod-card reveal" data-cat="chicken">
+        <div class="prod-img">🦴<span class="prod-tag tag-fresh">Fresh</span></div>
+        <div class="prod-body"><h3>Chicken Keema (Mince)</h3><p class="prod-desc">Freshly minced, no fillers. 500g pack.</p><div class="prod-rating"><span class="stars">★★★★★</span> 4.8 (302)</div><div class="prod-bottom"><div class="prod-price">₹280</div><button class="prod-add" onclick="addToCart('Chicken Keema',280)">+</button></div></div>
+      </div>
+      <div class="prod-card reveal" data-cat="eggs">
+        <div class="prod-img">🥚<span class="prod-tag tag-fresh">Fresh</span></div>
+        <div class="prod-body"><h3>White Eggs Tray (30)</h3><p class="prod-desc">Commercial white eggs, consistent sizing.</p><div class="prod-rating"><span class="stars">★★★★☆</span> 4.5 (412)</div><div class="prod-bottom"><div class="prod-price">₹180</div><button class="prod-add" onclick="addToCart('White Eggs Tray',180)">+</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY SECTION -->
+<section class="delivery-section" id="delivery">
+  <div class="bg-pattern"></div>
+  <div class="container">
+    <div class="delivery-inner">
+      <div class="reveal-left">
+        <div class="section-label">Delivery</div>
+        <div class="section-title">We Deliver <em style="color:var(--amber);font-style:normal">Fresh</em><br>Across Hyderabad</div>
+        <div class="section-sub">Same-day delivery, cold-chain packed, right to your doorstep. Track your order in real time.</div>
+        <div class="delivery-steps">
+          <div class="d-step"><div class="d-num">1</div><div><h4>Place Your Order</h4><p>Order online or WhatsApp us before 12 PM for same-day delivery.</p></div></div>
+          <div class="d-step"><div class="d-num">2</div><div><h4>We Process Fresh</h4><p>Your order is freshly processed and packed in cold-chain insulated boxes.</p></div></div>
+          <div class="d-step"><div class="d-num">3</div><div><h4>Dispatched & Tracked</h4><p>Receive an SMS with live tracking link when your delivery is on its way.</p></div></div>
+          <div class="d-step"><div class="d-num">4</div><div><h4>Doorstep Delivery</h4><p>Delivered fresh in 2-4 hours. Contactless delivery available.</p></div></div>
+        </div>
+      </div>
+      <div class="delivery-card reveal-right">
+        <h3>🗺️ Delivery Coverage</h3>
+        <div class="d-zone"><span class="zone-name">Hyderabad City (Core)</span><span class="zone-time">2–3 hrs</span><span class="zone-fee">₹40</span></div>
+        <div class="d-zone"><span class="zone-name">Secunderabad</span><span class="zone-time">2–4 hrs</span><span class="zone-fee">₹40</span></div>
+        <div class="d-zone"><span class="zone-name">Cyberabad / HITEC City</span><span class="zone-time">3–4 hrs</span><span class="zone-fee">₹50</span></div>
+        <div class="d-zone"><span class="zone-name">Kukatpally / Miyapur</span><span class="zone-time">3–5 hrs</span><span class="zone-fee">₹60</span></div>
+        <div class="d-zone"><span class="zone-name">Uppal / LB Nagar</span><span class="zone-time">3–5 hrs</span><span class="zone-fee">₹60</span></div>
+        <div class="d-zone"><span class="zone-name">RR District Villages</span><span class="zone-time">Next Day</span><span class="zone-fee">₹80</span></div>
+        <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:1rem;">Free delivery on orders above ₹500</p>
+        <button class="track-btn" onclick="openModal()">📍 Track My Order</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLY / B2B -->
+<section class="supply-section" id="supply">
+  <div class="container">
+    <div class="supply-inner">
+      <div class="reveal-left">
+        <div class="section-label">Bulk & B2B Supply</div>
+        <div class="section-title">Supply Chicken<br>for Your <em style="color:var(--amber);font-style:normal">Business</em></div>
+        <div class="section-sub">Restaurants, hotels, canteens, cloud kitchens — we supply fresh chicken at wholesale rates with dedicated account management.</div>
+        <div class="supply-cards" style="margin-top:2rem">
+          <div class="supply-card"><div class="s-icon">🍽️</div><div><h4>Restaurants & Hotels</h4><p>Daily supply contracts, custom portioning</p></div><span class="s-badge">Popular</span></div>
+          <div class="supply-card"><div class="s-icon">☁️</div><div><h4>Cloud Kitchens</h4><p>High-volume, consistent quality guaranteed</p></div><span class="s-badge">Hot</span></div>
+          <div class="supply-card"><div class="s-icon">🏫</div><div><h4>Canteens & Institutions</h4><p>Schools, offices, hospitals — bulk pricing</p></div><span class="s-badge">Bulk</span></div>
+          <div class="supply-card"><div class="s-icon">🛒</div><div><h4>Retail & Supermarkets</h4><p>Packaged, labelled stock for shelves</p></div><span class="s-badge">Wholesale</span></div>
+        </div>
+      </div>
+      <div class="supply-form reveal-right">
+        <h3>📋 Get a Supply Quote</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Business Name</label><input type="text" placeholder="Your restaurant / company"></div>
+          <div class="form-group"><label>Contact Name</label><input type="text" placeholder="Your name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 98765 43210"></div>
+          <div class="form-group"><label>City / Area</label><input type="text" placeholder="e.g. Banjara Hills"></div>
+        </div>
+        <div class="form-group"><label>Business Type</label>
+          <select>
+            <option>Select type...</option>
+            <option>Restaurant</option>
+            <option>Hotel</option>
+            <option>Cloud Kitchen</option>
+            <option>Canteen / Institution</option>
+            <option>Supermarket / Retail</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Quantity Needed</label><input type="text" placeholder="e.g. 100 kg / day"></div>
+          <div class="form-group"><label>Frequency</label>
+            <select><option>Daily</option><option>Weekly</option><option>Monthly</option><option>One-time</option></select>
+          </div>
+        </div>
+        <div class="form-group"><label>Additional Requirements</label><textarea placeholder="Custom cuts, packaging, certifications needed..."></textarea></div>
+        <button class="btn-primary" style="width:100%;justify-content:center;font-size:0.95rem" onclick="submitQuote()">📩 Request Quote</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-label reveal">What People Say</div>
+    <div class="section-title reveal">Trusted by Thousands</div>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">The quality is unmatched. I've been ordering from Rao's for 3 years now. The country chicken is absolutely fresh and the delivery is always on time.</p><div class="testi-author"><div class="testi-avatar">SR</div><div><div class="testi-name">Suresh Reddy</div><div class="testi-role">Home Customer · Banjara Hills</div></div></div></div>
+      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">We run a cloud kitchen and Rao's is our only chicken supplier. Their bulk supply is reliable, fresh every day, and the pricing is great for commercial use.</p><div class="testi-author"><div class="testi-avatar">PK</div><div><div class="testi-name">Priya Krishna</div><div class="testi-role">Cloud Kitchen Owner · Gachibowli</div></div></div></div>
+      <div class="testi-card reveal"><div class="testi-quote">"</div><div class="testi-stars">★★★★★</div><p class="testi-text">The marinated chicken pieces are amazing — ready to grill straight from the pack. The spicy marination is perfect Andhra-style. Highly recommended!</p><div class="testi-author"><div class="testi-avatar">AM</div><div><div class="testi-name">Anand Murthy</div><div class="testi-role">Home Customer · Kukatpally</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER SECTION -->
+<section class="order-section" id="order">
+  <div class="bg-line"></div>
+  <div class="container">
+    <div class="order-inner">
+      <div class="reveal-left">
+        <div class="section-label">Order Now</div>
+        <div class="section-title">Multiple Ways<br>to <em style="color:var(--amber);font-style:normal">Order</em></div>
+        <div class="section-sub">Choose the most convenient way to place your order. We're available 6 AM – 8 PM, 7 days a week.</div>
+        <div class="order-options">
+          <div class="order-option active" onclick="selectOption(this)"><div class="oo-icon">🌐</div><h4>Online Order</h4><p>Order from website, pay online</p></div>
+          <div class="order-option" onclick="selectOption(this)"><div class="oo-icon">📱</div><h4>WhatsApp Order</h4><p>Chat +91 98765 43210</p></div>
+          <div class="order-option" onclick="selectOption(this)"><div class="oo-icon">📞</div><h4>Phone Order</h4><p>Call us directly</p></div>
+          <div class="order-option" onclick="selectOption(this)"><div class="oo-icon">🏪</div><h4>Walk-in</h4><p>Visit our farm shop</p></div>
+        </div>
+        <div style="margin-top:2rem">
+          <a href="tel:+919876543210" class="btn-primary">📞 Call to Order</a>
+        </div>
+      </div>
+      <div class="cart-mockup reveal-right" id="cartPanel">
+        <h3>Your Cart <span class="cart-badge" id="cartBadge">0 items</span></h3>
+        <div id="cartItems">
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.4);text-align:center;padding:2rem 0;">Your cart is empty. Add products above!</p>
+        </div>
+        <div class="cart-total" id="cartTotalRow" style="display:none">
+          <span class="ct-label">Subtotal</span>
+          <span class="ct-val" id="cartTotal">₹0</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" style="display:none">🛒 Proceed to Checkout →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem"><div style="width:40px;height:40px;background:var(--amber);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">🐓</div><span style="font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff">Rao's Poultry Farm</span></div>
+        <p>Farm-fresh chicken delivered to your door since 2008. Raising birds the right way — natural, healthy, humane.</p>
+        <div style="margin-top:1rem;font-size:0.78rem;color:rgba(255,255,255,0.35)">FSSAI Lic. No. 10019022001234</div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a>
+        <a href="#products">Shop Products</a>
+        <a href="#delivery">Delivery Info</a>
+        <a href="#supply">Bulk Supply</a>
+        <a href="#about">About Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <a href="#products">Country Chicken</a>
+        <a href="#products">Broiler Chicken</a>
+        <a href="#products">Desi Eggs</a>
+        <a href="#products">Marinated Cuts</a>
+        <a href="#products">Keema / Mince</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p>📍 Rao's Poultry Farm, Chevella Road, RR District, Hyderabad — 501503</p>
+        <p style="margin-top:0.75rem">📞 +91 98765 43210</p>
+        <p style="margin-top:0.3rem">📧 orders@raospoultryfarm.in</p>
+        <p style="margin-top:0.3rem">⏰ 6 AM – 8 PM, Daily</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Rao's Poultry Farm. All rights reserved. Made with ❤️ in Hyderabad.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#" title="Instagram">📷</a>
+        <a class="social-btn" href="#" title="Facebook">👍</a>
+        <a class="social-btn" href="#" title="WhatsApp">💬</a>
+        <a class="social-btn" href="#" title="YouTube">▶️</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="trackModal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <h2>📍 Track Your Order</h2>
+    <p>Enter your order ID or phone number to get live delivery status.</p>
+    <div class="form-group"><label>Order ID / Phone Number</label><input type="text" id="trackInput" placeholder="e.g. RPF20241234 or 9876543210"></div>
+    <button class="btn-primary" style="width:100%;justify-content:center" onclick="trackOrder()">🔍 Track Order</button>
+    <div id="trackResult" style="margin-top:1rem;display:none;background:var(--green-light);border-radius:10px;padding:1rem;font-size:0.88rem;color:var(--green)"></div>
+  </div>
+</div>
+
+<script>
+  // NAV SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // COUNTER ANIMATION
+  const nums = document.querySelectorAll('[data-target]');
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const target = +el.getAttribute('data-target');
+        let current = 0;
+        const step = target / 60;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = Math.floor(current) + (target >= 1000 ? '+' : (target === 15 ? '' : '+'));
+          if (current >= target) clearInterval(timer);
+        }, 20);
+        countObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  nums.forEach(n => countObserver.observe(n));
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0);
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach((el, i) => {
+    el.dataset.delay = (i % 4) * 80;
+    revealObserver.observe(el);
+  });
+
+  // CART
+  let cart = [];
+  function addToCart(name, price) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) { existing.qty++; }
+    else { cart.push({ name, price, qty: 1 }); }
+    updateCart();
+    showToast(`✓ ${name} added!`);
+  }
+  function updateCart() {
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartBadge').textContent = count + ' item' + (count !== 1 ? 's' : '');
+    const itemsDiv = document.getElementById('cartItems');
+    const totalRow = document.getElementById('cartTotalRow');
+    const checkBtn = document.getElementById('checkoutBtn');
+    if (cart.length === 0) {
+      itemsDiv.innerHTML = '<p style="font-size:0.85rem;color:rgba(255,255,255,0.4);text-align:center;padding:2rem 0;">Your cart is empty. Add products above!</p>';
+      totalRow.style.display = 'none';
+      checkBtn.style.display = 'none';
+    } else {
+      itemsDiv.innerHTML = cart.map(i => `
+        <div class="cart-item">
+          <div class="ci-img">🍗</div>
+          <div style="flex:1">
+            <div class="ci-name">${i.name}</div>
+            <div class="ci-ctrl">
+              <button class="ci-btn" onclick="changeQty('${i.name}',-1)">−</button>
+              <span style="font-size:0.8rem;color:rgba(255,255,255,0.7)">${i.qty}</span>
+              <button class="ci-btn" onclick="changeQty('${i.name}',1)">+</button>
+            </div>
+          </div>
+          <div class="ci-price">₹${i.price * i.qty}</div>
+        </div>`).join('');
+      totalRow.style.display = 'flex';
+      checkBtn.style.display = 'block';
+      document.getElementById('cartTotal').textContent = '₹' + total;
+    }
+  }
+  function changeQty(name, delta) {
+    const item = cart.find(i => i.name === name);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+    updateCart();
+  }
+  function scrollToOrder() {
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+  }
+  function checkout() {
+    showToast('🎉 Proceeding to checkout...');
+    setTimeout(() => {
+      alert('Thank you for your order!\n\nOur team will call you within 10 minutes to confirm.\n\nFor immediate assistance:\n📞 +91 98765 43210\n💬 WhatsApp: +91 98765 43210');
+    }, 500);
+  }
+
+  // TOAST
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // PRODUCT FILTER
+  function filterProducts(cat, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.prod-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+
+  // ORDER OPTIONS
+  function selectOption(el) {
+    document.querySelectorAll('.order-option').forEach(o => o.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // MODAL
+  function openModal() {
+    document.getElementById('trackModal').classList.add('open');
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('trackModal')) closeModalBtn();
+  }
+  function closeModalBtn() {
+    document.getElementById('trackModal').classList.remove('open');
+  }
+  function trackOrder() {
+    const val = document.getElementById('trackInput').value.trim();
+    const res = document.getElementById('trackResult');
+    if (!val) { showToast('⚠️ Please enter an order ID'); return; }
+    res.style.display = 'block';
+    res.innerHTML = '🔄 Looking up order...';
+    setTimeout(() => {
+      res.innerHTML = `<strong>Order #RPF20241234</strong><br>📦 Status: <strong>Out for Delivery</strong><br>🚗 Driver: Ravi Kumar · ETA: 25 mins<br>📍 Currently near Begumpet flyover`;
+    }, 1200);
+  }
+
+  // SUPPLY QUOTE
+  function submitQuote() {
+    showToast('📩 Quote request sent! We will call within 2 hours.');
+  }
+</script>
+</body>
+</html>
